@@ -22,12 +22,6 @@ function App() {
     )
   }
 
-  // useEffect (async() => {
-  //   await axios.post('http://localhost:3001/PrePurchase', {
-  //     data: { data: "hello" },
-  //   })
-  // }, [checkOutBool]) 
-
   return (
     <>
       <Router>
@@ -44,6 +38,7 @@ function App() {
           <Route exact path="/PrePurchaseConfirmation">
             <PrePurchaseConfirmation 
               shoppingCart={shoppingCart}
+              setShoppingCart={setShoppingCart}
             />
           </Route>
           <Route exact path="/Confirmation">

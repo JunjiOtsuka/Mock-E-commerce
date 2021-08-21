@@ -1,7 +1,7 @@
 import { Col, Card, Button, Row } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-export default function Checkout({ shoppingCart, increment, decrement, remove, checkOutButton, checkOutBool }) {
+export default function Checkout({ shoppingCart, increment, decrement, remove }) {
     let history = useHistory()
     return (
         <Col md={2}>
@@ -10,7 +10,8 @@ export default function Checkout({ shoppingCart, increment, decrement, remove, c
                     My Cart {shoppingCart.length}
                 </Card.Title>
                 <div>
-                    {shoppingCart.map((item) => (
+                    {shoppingCart.length >= 0
+                    && shoppingCart.map((item) => (
                         <Row className="d-flex align-items-center mb-3">
                             <Col md={3}>
                                 {item.name}

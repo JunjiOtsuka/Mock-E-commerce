@@ -2,10 +2,10 @@ import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
-export default function PrePurchaseConfirmation({ shoppingCart }) {
+export default function PrePurchaseConfirmation({ shoppingCart, setShoppingCart }) {
     let history = useHistory()
 
-    function submitPurchaseOrder(history, shoppingCart, productInfo) {
+    function submitPurchaseOrder(history, shoppingCart) {
         shoppingCart.map((item) => 
             axios.post('http://localhost:3001/shopping', {
                 shoppingCart: {
@@ -21,7 +21,7 @@ export default function PrePurchaseConfirmation({ shoppingCart }) {
             })
         )
         
-        shoppingCart = {}
+        setShoppingCart(shoppingCart = [])
         history.push("/Confirmation")
 
     }
@@ -30,15 +30,16 @@ export default function PrePurchaseConfirmation({ shoppingCart }) {
         <Container>
             <Form>
                 <Row className="mb-3">
+                    <Form.Group as={Col} controlId="formGridFullName">
+                        <Form.Label>Full Name</Form.Label>
+                        <Form.Control type="FullName" placeholder="First Name, Last Name, Middle" />
+                    </Form.Group>
+
                     <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter email" />
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
                 </Row>
 
                 <Form.Group className="mb-3" controlId="formGridAddress1">

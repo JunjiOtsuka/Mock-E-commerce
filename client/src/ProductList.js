@@ -7,31 +7,33 @@ import axios from 'axios'
 
 export default function ProductList({ productInfo, setProductInfo, shoppingCart, setShoppingCart, checkOutBool, checkOutButton }) {
     function clickedAddToCart(item) {
-        const exist = shoppingCart.find(x => x.id === item.id)
+        const exist = shoppingCart.find(ele => ele.id === item.id)
         if (exist) return
 
         setShoppingCart([...shoppingCart, item])
     }
 
     function increment(item) {
-        const exist = shoppingCart.find(x => x.id === item.id)
+        const exist = shoppingCart.find(ele => ele.id === item.id)
 
         if (exist) {
-            setShoppingCart(
-                shoppingCart.map((x) =>
-                    x.id === item.id ? { ...exist, cartQty: exist.cartQty + 1 } : x
+            if (item.inStock > item.cartQty) {
+                setShoppingCart(
+                    shoppingCart.map((ele) =>
+                        ele.id === item.id ? { ...exist, cartQty: exist.cartQty + 1 } : ele
+                    )
                 )
-            )
+            }
         }
     }
 
     function decrement(item) {
-        const exist = shoppingCart.find(x => x.id === item.id)
+        const exist = shoppingCart.find(ele => ele.id === item.id)
 
         if (exist) {
             setShoppingCart(
-                shoppingCart.map((x) =>
-                    x.id === item.id ? { ...exist, cartQty: exist.cartQty - 1 } : x
+                shoppingCart.map((ele) =>
+                    ele.id === item.id ? { ...exist, cartQty: exist.cartQty - 1 } : ele
                 )
             )
         }
@@ -42,9 +44,9 @@ export default function ProductList({ productInfo, setProductInfo, shoppingCart,
     }
 
     function remove(item) {
-        const exist = shoppingCart.find(x => x.id === item.id)
+        const exist = shoppingCart.find(ele => ele.id === item.id)
         if (exist) {
-            setShoppingCart(shoppingCart.filter((x) => x.id !== item.id))
+            setShoppingCart(shoppingCart.filter((ele) => ele.id !== item.id))
         }
     }
 

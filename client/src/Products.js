@@ -1,6 +1,6 @@
 import { Row, Col, Card, Button } from 'react-bootstrap'
 
-export default function Products({ productInfo, clickedAddToCart  }) {
+export default function Products({ productInfo, clickedAddToCart }) {
 
     return (
         <Col>
@@ -17,7 +17,12 @@ export default function Products({ productInfo, clickedAddToCart  }) {
                                 <Card.Text>
                                     {item.inStock} in stock
                                 </Card.Text>
-                                <Button variant="warning" onClick={()=>clickedAddToCart(item)} >Add To Cart</Button>
+                                
+                                {item.inStock > 0 
+                                && <Button variant="warning" onClick={()=>clickedAddToCart(item)} >Add To Cart</Button>
+                                }
+
+
                             </Card.Body>
                         </Card>
                     </Col>
